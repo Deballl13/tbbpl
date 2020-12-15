@@ -29,12 +29,15 @@ public class Menu {
 	
 	public static void menuDashboard() {
 		
+		Transaksi transaksi = new Transaksi();
+		
 		System.out.println("\n\n--DASHBOARD--");
 		System.out.println("1. Pengaturan");
-		System.out.println("2. Transaksi");
-		System.out.println("3. Barang");
-		System.out.println("4. Laporan");
-		System.out.println("5. Logout");
+		System.out.println("2. Data Master Transaksi");
+		System.out.println("3. Data Master Barang");
+		System.out.println("4. Penjualan");
+		System.out.println("5. Laporan");
+		System.out.println("6. Logout");
 		System.out.print("Tentukan pilihanmu : ");
 		
 		try {
@@ -47,7 +50,7 @@ public class Menu {
 					break;
 					
 				case 2:
-					
+					menuTransaksi();
 					break;
 					
 				case 3:
@@ -55,10 +58,14 @@ public class Menu {
 					break;
 					
 				case 4: 
-					
-					break; 
+					transaksi.tambahData();
+					break;
 					
 				case 5:
+					
+					break;
+					
+				case 6:
 					Login.ulang=2;
 					System.out.println("\n");
 					Program.main(null);
@@ -80,14 +87,14 @@ public class Menu {
 		
 	public static void pengaturanAkun() {
 		
+		User user = new User();
+		
 		System.out.println("\n\n--PENGATURAN AKUN--");
 		System.out.println("1. Ubah Password");
 		System.out.println("2. Hapus Akun");
 		System.out.println("3. Lihat Daftar User");
 		System.out.println("4. Cari User");
 		System.out.print("Tentukan pilihanmu : ");
-		
-		User user = new User();
 		
 		try {
 			Integer pilihan = scanner.nextInt();
@@ -190,7 +197,46 @@ public class Menu {
 			System.out.println("Masukkan input dengan benar");
 		}
 		
+	}
+	
+	
+	public static void menuTransaksi() {
 		
+		Transaksi transaksi = new Transaksi();
+		transaksi.lihatData();
+		
+		System.out.println("\n\n--DATA MASTER TRANSAKSI--");
+		System.out.println("1. Ubah data transaksi");
+		System.out.println("2. Hapus data transaksi");
+		System.out.println("3. Cari data transaksi");
+		System.out.print("Tentukan pilihanmu : ");
+		
+		try {
+			
+			Integer pilihan = scanner.nextInt();
+			switch(pilihan) {
+			
+			case 1:
+				transaksi.editData();
+				break;
+				
+			case 2:
+				transaksi.hapusData();
+				break;
+				
+			case 3:
+				transaksi.cariData();
+				break;
+				
+			default :
+
+				break;
+			
+			}
+			
+		} catch (InputMismatchException e) {
+			System.out.println("Masukkan input dengan benar");
+		}
 		
 	}
 

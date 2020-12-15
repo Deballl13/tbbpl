@@ -25,9 +25,6 @@ public class Barang implements Kelola{
 	public void tambahData() {
 		System.out.println("\n\n--TAMBAH DATA--");
 		
-		System.out.print("SKU : ");
-		String sku = scn.next().toUpperCase();
-		
 		System.out.print("Nama barang : ");
 		String nama = scn.next();
 		String namafix = nama.substring(0, 1).toUpperCase() + nama.substring(1);
@@ -41,10 +38,12 @@ public class Barang implements Kelola{
 		System.out.print("Harga jual : ");
 		Integer harga_jual = scn.nextInt();
 		
-		barangData = new BarangData(sku, namafix, stock, harga_beli, harga_jual);
+		barangData = new BarangData(namafix, stock, harga_beli, harga_jual);
 		
 		if(barangFunction.tambahBarang(barangData) == 1) {
 			System.out.println("Barang berhasil ditambahkan");
+			Menu.menuDashboard();
+		} else {
 			Menu.menuDashboard();
 		}
 		

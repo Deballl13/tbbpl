@@ -20,7 +20,6 @@ public class BarangFunction {
 	static Statement stmt;
 	static PreparedStatement statement;
 	
-	Barang barang;
 	BarangData barangData;
 	
 	public BarangFunction(){
@@ -39,33 +38,44 @@ public class BarangFunction {
 	public Integer tambahBarang(BarangData barangData) {
 		
 		Integer insert = 0;
-		barang = new Barang();
+		Integer i;
 		
 		try {
 			
-			//	Cek apakah sku sudah ada atau belum
-			
-			String cek = "SELECT sku FROM barang WHERE sku = ?";
+			//	cek nama barang
+			String cek = "SELECT nama FROM barang WHERE nama=?";
 			statement = conn.prepareStatement(cek);
-			statement.setString(1, barangData.sku);
-			ResultSet result = statement.executeQuery();
+			statement.setString(1, barangData.nama);
+			ResultSet rscek = statement.executeQuery();
 			
-			if(result.next()) {
+			if(!rscek.next()) {
 				
-				System.out.println("SKU sudah ada");
-				barang.tambahData();
+				String ambilsku = "SELECT sku FROM barang WHERE sku IN (SELECT MAX(sku) FROM barang)";
+				stmt= conn.createStatement();
+				ResultSet result = stmt.executeQuery(ambilsku);
 				
-			} else {
+				if(!result.next()) {
+					String dapatsku = result.getString("sku");
+					String sku = dapatsku.substring(1);
+					i = Integer.parseInt(sku);
+					i++;
+				} else {
+					i=1;
+				}
+				
+				String skufix = "B0" + i.toString();
 				
 				String query = "INSERT INTO barang VALUES(?,?,?,?,?)";
 				statement = conn.prepareStatement(query);
-				statement.setString(1, barangData.sku);
+				statement.setString(1, skufix);
 				statement.setString(2, barangData.nama);
 				statement.setInt(3, barangData.stock);
 				statement.setInt(4, barangData.harga_beli);
 				statement.setInt(5, barangData.harga_jual);
 				insert = statement.executeUpdate();
 				
+			} else {
+				System.out.println("Barang sudah terdaftar");
 			}
 			
 		} catch (SQLException e) {
@@ -104,16 +114,28 @@ public class BarangFunction {
 	public Integer hapusBarang(String sku) {
 		
 		Integer delete = 0;
+		barangData = new BarangData();
 		
 		try {
+			
+			String cekNama = "SELECT nama FROM barang WHERE sku=?";
+			statement = conn.prepareStatement(cekNama);
+			statement.setString(1, sku);
+			ResultSet result = statement.executeQuery();
+			result.next();
 			
 			String query = "DELETE FROM barang WHERE sku=?";
 			statement = conn.prepareStatement(query);
 			statement.setString(1, sku);
 			delete = statement.executeUpdate();
 			
+			if(delete == 1) {
+				barangData.stockBarang.remove(result.getString("nama"));
+			}
+			
 		} catch (SQLException e) {
 			System.out.println("Terjadi kesalahan");
+			e.printStackTrace();
 		}
 		
 		return delete;

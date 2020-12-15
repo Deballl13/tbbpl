@@ -1,14 +1,11 @@
 package kelompok3.pengelolaanKasir;
 
-import java.util.Date;
 import java.util.InputMismatchException;
 
 public class Program {
 
 	public static void main(String[] args){
 		
-		User user = new User() ;
-		Date date = new Date();
 		Login login = new Login();
 		SignUp signup = new SignUp();
 

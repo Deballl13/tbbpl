@@ -35,10 +35,10 @@ public class StockFunction {
 		
 		Integer tambah = 0;
 		Stock stock = new Stock();
-		
-		//	Cek SKU barang	
+			
 		try {
 			
+			//	Cek SKU barang
 			String cek = "SELECT * FROM barang WHERE sku=?";
 			statement = conn.prepareStatement(cek);
 			statement.setString(1, sku);
@@ -51,11 +51,9 @@ public class StockFunction {
 				
 			} else {
 				
-				Integer jumlah = result.getInt("stock") + restock;
-				
 				String query = "UPDATE barang SET stock=? WHERE sku=?";
 				statement = conn.prepareStatement(query);
-				statement.setInt(1, jumlah);
+				statement.setInt(1, result.getInt("stock") + restock);
 				statement.setString(2, sku);
 				tambah = statement.executeUpdate();
 				
