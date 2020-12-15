@@ -17,6 +17,7 @@ public class UserFunction {
 	UserData userData;
 	User user;
 	Login logIn;
+	SignUp signup;
 
 	public UserFunction(){
 		
@@ -97,6 +98,8 @@ public class UserFunction {
 	public Integer register(UserData userData, String confirm) {
 		
 		user = new User();
+		logIn = new Login();
+		signup = new SignUp();
 		Integer register = 0;
 		
 		// Melakukan pengecekan validitas email
@@ -116,7 +119,7 @@ public class UserFunction {
 					if (resultCek.next()) {
 						
 						System.out.println("Username sudah terdaftar");
-						user.tambahData();
+						signup.tambahData();
 						
 					} else{
 						
@@ -146,14 +149,14 @@ public class UserFunction {
 			} else {
 				
 				System.out.println("Password yang anda masukkan salah");
-				user.tambahData();
+				signup.tambahData();
 				
 			}
 			
 		} else{
 					
 			System.out.println("Masukkan email dengan benar");
-			user.tambahData();
+			signup.tambahData();
 			
 		}		
 	

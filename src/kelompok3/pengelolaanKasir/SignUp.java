@@ -3,7 +3,7 @@ package kelompok3.pengelolaanKasir;
 import java.util.Date;
 import java.util.Scanner;
 
-public class SignUp {
+public class SignUp extends User {
 
 Scanner scn = new Scanner(System.in);
 Date date = new Date();

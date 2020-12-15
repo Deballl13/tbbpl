@@ -2,7 +2,7 @@ package kelompok3.pengelolaanKasir;
 
 import java.util.Scanner;
 
-public class Stock {
+public class Stock extends Barang {
 
 	Scanner scn = new Scanner(System.in);
 	StockFunction stockFunction;
@@ -22,7 +22,7 @@ public class Stock {
 		System.out.println("\n\n--RESTOCK BARANG--");
 		
 		System.out.print("SKU : ");
-		String sku = scn.next();
+		String sku = scn.next().toUpperCase();
 		
 		System.out.print("Stock baru : ");
 		Integer stock = scn.nextInt();

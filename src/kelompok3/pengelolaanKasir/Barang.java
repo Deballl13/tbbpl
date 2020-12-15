@@ -26,10 +26,11 @@ public class Barang implements Kelola{
 		System.out.println("\n\n--TAMBAH DATA--");
 		
 		System.out.print("SKU : ");
-		String sku = scn.next();
+		String sku = scn.next().toUpperCase();
 		
 		System.out.print("Nama barang : ");
 		String nama = scn.next();
+		String namafix = nama.substring(0, 1).toUpperCase() + nama.substring(1);
 		
 		System.out.print("Stock : ");
 		Integer stock = scn.nextInt();
@@ -40,7 +41,7 @@ public class Barang implements Kelola{
 		System.out.print("Harga jual : ");
 		Integer harga_jual = scn.nextInt();
 		
-		barangData = new BarangData(sku, nama, stock, harga_beli, harga_jual);
+		barangData = new BarangData(sku, namafix, stock, harga_beli, harga_jual);
 		
 		if(barangFunction.tambahBarang(barangData) == 1) {
 			System.out.println("Barang berhasil ditambahkan");
@@ -55,15 +56,16 @@ public class Barang implements Kelola{
 		System.out.println("\n\n--EDIT DATA BARANG--");
 		
 		System.out.print("sku : ");
-		String sku = scn.next();
+		String sku = scn.next().toUpperCase();
 		
 		System.out.print("Nama barang : ");
 		String nama = scn.next();
+		String namafix = nama.substring(0, 1).toUpperCase() + nama.substring(1);
 		
 		System.out.print("Harga jual : ");
 		Integer harga_jual = scn.nextInt();
 		
-		barangData = new BarangData(sku, nama, harga_jual);
+		barangData = new BarangData(sku, namafix, harga_jual);
 		
 		if(barangFunction.editBarang(barangData) == 1) {
 			System.out.println("Data berhasil diupdate");
@@ -81,7 +83,7 @@ public class Barang implements Kelola{
 		System.out.println("\n\n--HAPUS DATA BARANG--");
 		
 		System.out.print("sku : ");
-		String sku = scn.next();
+		String sku = scn.next().toUpperCase();
 		
 		if(barangFunction.hapusBarang(sku) == 1) {
 			System.out.println("Data berhasil dihapus");
