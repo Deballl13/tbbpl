@@ -59,7 +59,7 @@ public class Menu {
 					break; 
 					
 				case 5:
-					User.ulang=2;
+					Login.ulang=2;
 					System.out.println("\n");
 					Program.main(null);
 					break;

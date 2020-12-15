@@ -16,6 +16,7 @@ public class UserFunction {
 	static PreparedStatement statement;
 	UserData userData;
 	User user;
+	Login logIn;
 
 	public UserFunction(){
 		
@@ -60,18 +61,19 @@ public class UserFunction {
 				}
 				
 			} else {
-				if(User.ulang>0) {
+				if(Login.ulang>0) {
 					System.out.println("Username dan password anda salah");
-				} else if(User.ulang <= 0) {
+				} else if(Login.ulang <= 0) {
 					System.out.println("Password anda telah direset");
 					
 					user = new User();
+					logIn = new Login();
 					
 					try {
 						
 						String reset = "UPDATE user SET password=? WHERE username =?";
 						statement = conn.prepareStatement(reset);
-						statement.setString(1, user.randomString());
+						statement.setString(1, logIn.randomString());
 						statement.setString(2, userData.username);
 						statement.executeUpdate();
 						

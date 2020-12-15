@@ -1,25 +1,25 @@
 package kelompok3.pengelolaanKasir;
 
-import java.util.Scanner;
-
 import java.util.Date;
 import java.util.InputMismatchException;
 
 public class Program {
 
-	static User user = new User() ;
-	static Date date = new Date();
-
-	public static void main(String[] args){	
+	public static void main(String[] args){
+		
+		User user = new User() ;
+		Date date = new Date();
+		Login login = new Login();
+		SignUp signup = new SignUp();
 
 		try {
 			switch (Menu.landingPage()) {
 			case 1:
-				user.login();
+				login.login();
 				break;
 	
 			case 2:
-				user.tambahData();
+				signup.tambahData();
 				break;
 		
 			default:
