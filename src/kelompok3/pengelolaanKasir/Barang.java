@@ -1,6 +1,5 @@
 package kelompok3.pengelolaanKasir;
 
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
