@@ -45,20 +45,15 @@ public class UserFunction {
 			
 			if(result.next()) {
 				
-				try {
-					String sql = "UPDATE user SET login_terakhir=? WHERE username=?";
-					statement = conn.prepareStatement(sql);
-					statement.setString(1, userData.date);
-					statement.setString(2, userData.username);
-					login = statement.executeUpdate();
-					
-					if(login == 1) {
-						UserData.usr = userData.username;
-						UserData.pass = userData.password;
-					}
-					
-				} catch (Exception e) {
-					e.printStackTrace();
+				String sql = "UPDATE user SET login_terakhir=? WHERE username=?";
+				statement = conn.prepareStatement(sql);
+				statement.setString(1, userData.date);
+				statement.setString(2, userData.username);
+				login = statement.executeUpdate();
+				
+				if(login == 1) {
+					UserData.usr = userData.username;
+					UserData.pass = userData.password;
 				}
 				
 			} else {
@@ -70,17 +65,11 @@ public class UserFunction {
 					user = new User();
 					logIn = new Login();
 					
-					try {
-						
-						String reset = "UPDATE user SET password=? WHERE username =?";
-						statement = conn.prepareStatement(reset);
-						statement.setString(1, logIn.randomString());
-						statement.setString(2, userData.username);
-						statement.executeUpdate();
-						
-					} catch (SQLException e) {
-						System.out.println("Terjadi kesalahan");
-					}
+					String reset = "UPDATE user SET password=? WHERE username =?";
+					statement = conn.prepareStatement(reset);
+					statement.setString(1, logIn.randomString());
+					statement.setString(2, userData.username);
+					statement.executeUpdate();
 					
 				}
 			}
@@ -89,8 +78,8 @@ public class UserFunction {
 			System.out.println("Terjadi kesalahan");
 		}
 		
-		
 		return login;
+		
 	}
 	
 	
@@ -123,20 +112,13 @@ public class UserFunction {
 						
 					} else{
 						
-						try {
-							String query = "INSERT INTO user VALUES (?,?,?,?)";
-							statement = conn.prepareStatement(query);
-							statement.setString(1, userData.username);
-							statement.setString(2, userData.date);
-							statement.setString(3, userData.email);
-							statement.setString(4, userData.password);
-							register = statement.executeUpdate();
-									
-						} catch (SQLException e) {
-							
-							System.out.println("Terjadi kesalahan");
-						
-						}
+						String query = "INSERT INTO user VALUES (?,?,?,?)";
+						statement = conn.prepareStatement(query);
+						statement.setString(1, userData.username);
+						statement.setString(2, userData.date);
+						statement.setString(3, userData.email);
+						statement.setString(4, userData.password);
+						register = statement.executeUpdate();
 
 					}
 
