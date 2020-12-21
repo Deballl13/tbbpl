@@ -30,4 +30,11 @@ public class TransaksiData {
 		this.jumlah=jumlah;
 	}
 	
+	public TransaksiData(String sku, String nama, Integer jumlah, Integer harga) {
+		this.sku=sku;
+		this.namaBarang=nama;
+		this.jumlah=jumlah;
+		this.total=harga;
+	}
+	
 }

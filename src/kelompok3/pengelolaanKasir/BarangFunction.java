@@ -54,9 +54,9 @@ public class BarangFunction {
 				stmt= conn.createStatement();
 				ResultSet result = stmt.executeQuery(ambilsku);
 				
-				if(!result.next()) {
+				if(result.next()) {
 					String dapatsku = result.getString("sku");
-					String sku = dapatsku.substring(1);
+					String sku = dapatsku.substring(2);
 					i = Integer.parseInt(sku);
 					i++;
 				} else {
@@ -128,10 +128,6 @@ public class BarangFunction {
 			statement = conn.prepareStatement(query);
 			statement.setString(1, sku);
 			delete = statement.executeUpdate();
-			
-			if(delete == 1) {
-				barangData.stockBarang.remove(result.getString("nama"));
-			}
 			
 		} catch (SQLException e) {
 			System.out.println("Terjadi kesalahan");

@@ -1,0 +1,4 @@
+Keuntungan tanggal 2 = 3250000
+Keuntungan tanggal 7 = 100000
+Keuntungan tanggal 15 = 1100000
+Keuntungan tanggal 20 = 400000

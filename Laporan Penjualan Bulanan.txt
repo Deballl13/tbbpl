@@ -1,0 +1,3 @@
+SKU	Nama Barang	Jumlah		Total Penjualan
+B01	Motor		22		3300000
+B02	Mobil		15		9750000

@@ -1,0 +1,18 @@
+Tanggal 2020-12-02
+SKU	Nama Barang	Jumlah		Total Penjualan
+B01	Motor		5		750000
+B02	Mobil		12		7500000
+
+Tanggal 2020-12-07
+SKU	Nama Barang	Jumlah		Total Penjualan
+B01	Motor		2		300000
+
+Tanggal 2020-12-15
+SKU	Nama Barang	Jumlah		Total Penjualan
+B01	Motor		7		1050000
+B02	Mobil		3		2250000
+
+Tanggal 2020-12-20
+SKU	Nama Barang	Jumlah		Total Penjualan
+B01	Motor		8		1200000
+

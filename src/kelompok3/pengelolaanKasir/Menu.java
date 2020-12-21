@@ -30,6 +30,7 @@ public class Menu {
 	public static void menuDashboard() {
 		
 		Transaksi transaksi = new Transaksi();
+		Laporan laporan = new Laporan();
 		
 		System.out.println("\n\n--DASHBOARD--");
 		System.out.println("1. Pengaturan");
@@ -62,7 +63,11 @@ public class Menu {
 					break;
 					
 				case 5:
-					
+					laporan.laporanBulanan();
+					laporan.laporanHarian();
+					laporan.untungBulan();
+					laporan.untungHarian();
+					Menu.tunggu();
 					break;
 					
 				case 6:

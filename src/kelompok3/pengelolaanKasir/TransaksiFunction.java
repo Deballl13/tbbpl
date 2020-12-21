@@ -37,26 +37,14 @@ public class TransaksiFunction {
 		Integer i;
 		Integer total = 0;
 		
-		try {			
-			
-			//	menyimpan data stock awal			
-			String savedata = "SELECT * FROM barang";
-			stmt = conn.createStatement();
-			ResultSet rssave = stmt.executeQuery(savedata);
-			
-			while(rssave.next()) {
-				BarangData barangData = new BarangData(
-						rssave.getString("nama"),
-						rssave.getInt("stock")
-				);
-			}
+		try {
 			
 			//	cek nomor resi terakhir
 			String ambilresi = "SELECT noresi FROM transaksi WHERE noresi IN (SELECT MAX(noresi) FROM transaksi)";
 			stmt= conn.createStatement();
 			ResultSet result = stmt.executeQuery(ambilresi);
 			
-			if(!result.next()) {
+			if(result.next()) {
 				String dapatresi = result.getString("noresi");
 				String noresi = dapatresi.substring(1);
 				i = Integer.parseInt(noresi);
@@ -83,6 +71,7 @@ public class TransaksiFunction {
 				ResultSet rs = statement.executeQuery();
 				rs.next();
 				
+				// memasukkan data ke tabel detail
 				String sql = "INSERT INTO detail_transaksi(sku, noresi, jumlah, harga) VALUES(?,?,?,?)";
 				statement = conn.prepareStatement(sql);
 				statement.setString(1, rs.getString("sku"));
@@ -106,6 +95,7 @@ public class TransaksiFunction {
 			
 		} catch (SQLException e) {
 			System.out.println("Terjadi kesalahan");
+			e.printStackTrace();
 		}
 		
 		return tambah;
