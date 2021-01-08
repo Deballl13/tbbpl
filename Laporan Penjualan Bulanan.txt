@@ -1,3 +1,6 @@
 SKU	Nama Barang	Jumlah		Total Penjualan
-B01	Motor		22		3300000
-B02	Mobil		15		9750000
+B01	Susu		20		147000
+B02	Kopi		17		170000
+B03	Teh		11		55000
+B04	Energen		6		51000
+B05	Milo		5		700000

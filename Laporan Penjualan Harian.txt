@@ -1,18 +1,28 @@
 Tanggal 2020-12-02
 SKU	Nama Barang	Jumlah		Total Penjualan
-B01	Motor		5		750000
-B02	Mobil		12		7500000
+B01	Susu		3		21000
+B02	Kopi		5		50000
+B04	Energen		3		25500
+
+Tanggal 2020-12-03
+SKU	Nama Barang	Jumlah		Total Penjualan
+B05	Milo		2		280000
 
 Tanggal 2020-12-07
 SKU	Nama Barang	Jumlah		Total Penjualan
-B01	Motor		2		300000
-
-Tanggal 2020-12-15
-SKU	Nama Barang	Jumlah		Total Penjualan
-B01	Motor		7		1050000
-B02	Mobil		3		2250000
+B01	Susu		14		105000
+B02	Kopi		5		50000
+B03	Teh		7		35000
+B04	Energen		3		25500
 
 Tanggal 2020-12-20
 SKU	Nama Barang	Jumlah		Total Penjualan
-B01	Motor		8		1200000
+B01	Susu		3		21000
+B03	Teh		2		10000
+
+Tanggal 2020-12-22
+SKU	Nama Barang	Jumlah		Total Penjualan
+B02	Kopi		7		70000
+B03	Teh		2		10000
+B05	Milo		3		420000
 

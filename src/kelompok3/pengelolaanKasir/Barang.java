@@ -8,10 +8,10 @@ import java.util.TreeMap;
 public class Barang implements Kelola{
 	
 	Scanner scn = new Scanner(System.in);
-	BarangData barangData;
+	BarangData barangData; // mendeklarasikan variabel barangData dengan tipe data BarangData
 	BarangFunction barangFunction;
 	
-	
+	// constructor
 	public Barang() {
 		try {
 			barangFunction = new BarangFunction();
@@ -26,7 +26,7 @@ public class Barang implements Kelola{
 		System.out.println("\n\n--TAMBAH DATA--");
 		
 		System.out.print("Nama barang : ");
-		String nama = scn.next();
+		String nama = scn.nextLine();
 		String namafix = nama.substring(0, 1).toUpperCase() + nama.substring(1);
 		
 		System.out.print("Stock : ");
@@ -54,17 +54,14 @@ public class Barang implements Kelola{
 		
 		System.out.println("\n\n--EDIT DATA BARANG--");
 		
-		System.out.print("sku : ");
-		String sku = scn.next().toUpperCase();
-		
 		System.out.print("Nama barang : ");
-		String nama = scn.next();
+		String nama = scn.nextLine();
 		String namafix = nama.substring(0, 1).toUpperCase() + nama.substring(1);
 		
 		System.out.print("Harga jual : ");
 		Integer harga_jual = scn.nextInt();
 		
-		barangData = new BarangData(sku, namafix, harga_jual);
+		barangData = new BarangData(namafix, harga_jual);
 		
 		if(barangFunction.editBarang(barangData) == 1) {
 			System.out.println("Data berhasil diupdate");
@@ -100,7 +97,7 @@ public class Barang implements Kelola{
 		System.out.println("\n\n--PENCARIAN--");
 		
 		System.out.print("Nama barang : ");
-		String nama = scn.next();
+		String nama = scn.nextLine();
 		
 		ArrayList<BarangData> searchList = barangFunction.cariBarang(nama);
 		
@@ -115,15 +112,15 @@ public class Barang implements Kelola{
         System.out.println("Harga Jual");
 		
 		for(BarangData barangData : searchList){
-            System.out.print(barangData.sku);
+            System.out.print(barangData.getSku());
             System.out.print("\t");
-            System.out.print(barangData.nama);
+            System.out.print(barangData.getNama());
             System.out.print("\t\t");
-            System.out.print(barangData.stock);
+            System.out.print(barangData.getStock());
             System.out.print("\t\t");
-            System.out.print(barangData.harga_beli);
+            System.out.print(barangData.getBeli());
             System.out.print("\t\t");
-            System.out.println(barangData.harga_jual);
+            System.out.println(barangData.getJual());
         }
 		
 		Menu.tunggu();
@@ -140,7 +137,7 @@ public class Barang implements Kelola{
 		System.out.print("SKU");
         System.out.print("\t");
         System.out.print("Nama Barang");
-        System.out.print("\t");
+        System.out.print("\t\t");
         System.out.print("Stock");
         System.out.print("\t\t");
         System.out.print("Harga Beli");
@@ -150,15 +147,15 @@ public class Barang implements Kelola{
         for(Map.Entry list : daftar.entrySet()){
             BarangData listUser = (BarangData) list.getValue();
             
-            System.out.print(listUser.sku);
+            System.out.print(listUser.getSku());
             System.out.print("\t");
             System.out.print(list.getKey());
             System.out.print("\t\t");
-            System.out.print(listUser.stock);
+            System.out.print(listUser.getStock());
             System.out.print("\t\t");
-            System.out.print(listUser.harga_beli);
+            System.out.print(listUser.getBeli());
             System.out.print("\t\t");
-            System.out.println(listUser.harga_jual);
+            System.out.println(listUser.getJual());
             
         }
 		

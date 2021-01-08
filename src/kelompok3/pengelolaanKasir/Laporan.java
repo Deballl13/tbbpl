@@ -83,11 +83,11 @@ public class Laporan {
 	            
 	            cetak.print(list.getKey());
 	            cetak.print("\t");
-	            cetak.print(listLapor.namaBarang);
+	            cetak.print(listLapor.getNamaBarang());
 	            cetak.print("\t\t");
-	            cetak.print(listLapor.jumlah);
+	            cetak.print(listLapor.getJumlah());
 	            cetak.print("\t\t");
-	            cetak.println(listLapor.total);
+	            cetak.println(listLapor.getTotal());
 	            
 	        }
 	        
@@ -149,11 +149,11 @@ public class Laporan {
 			            
 			            cetak.print(list.getKey());
 			            cetak.print("\t");
-			            cetak.print(listLapor.namaBarang);
+			            cetak.print(listLapor.getNamaBarang());
 			            cetak.print("\t\t");
-			            cetak.print(listLapor.jumlah);
+			            cetak.print(listLapor.getJumlah());
 			            cetak.print("\t\t");
-			            cetak.println(listLapor.total);
+			            cetak.println(listLapor.getTotal());
 			            
 			        }
 			        
@@ -188,11 +188,11 @@ public class Laporan {
 	            
 	            cetak.print(list.getKey());
 	            cetak.print("\t");
-	            cetak.print(listLapor.namaBarang);
+	            cetak.print(listLapor.getNamaBarang());
 	            cetak.print("\t\t");
-	            cetak.print(listLapor.jumlah);
+	            cetak.print(listLapor.getJumlah());
 	            cetak.print("\t\t");
-	            cetak.println(listLapor.total);
+	            cetak.println(listLapor.getTotal());
 	            
 	        }
 	        

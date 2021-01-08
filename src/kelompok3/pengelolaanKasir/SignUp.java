@@ -7,9 +7,9 @@ public class SignUp extends User {
 
 Scanner scn = new Scanner(System.in);
 Date date = new Date();
-UserFunction userFunction;	
+private UserFunction userFunction;	
 Login login = new Login();
-UserData userData;
+private UserData userData;
 	
 	public SignUp() {
 		try {

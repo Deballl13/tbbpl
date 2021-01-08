@@ -39,21 +39,21 @@ public class UserFunction {
 		try {	
 			String query = "SELECT * FROM user WHERE username=? AND password=?";
 			statement = conn.prepareStatement(query);
-			statement.setString(1, userData.username);
-			statement.setString(2, userData.password);
+			statement.setString(1, userData.getUsername());
+			statement.setString(2, userData.getPassword());
 			ResultSet result = statement.executeQuery();
 			
 			if(result.next()) {
 				
 				String sql = "UPDATE user SET login_terakhir=? WHERE username=?";
 				statement = conn.prepareStatement(sql);
-				statement.setString(1, userData.date);
-				statement.setString(2, userData.username);
+				statement.setString(1, userData.getDate());
+				statement.setString(2, userData.getUsername());
 				login = statement.executeUpdate();
 				
 				if(login == 1) {
-					UserData.usr = userData.username;
-					UserData.pass = userData.password;
+					userData.setUser(userData.getUsername());
+					userData.setPass(userData.getPassword());
 				}
 				
 			} else {
@@ -68,7 +68,7 @@ public class UserFunction {
 					String reset = "UPDATE user SET password=? WHERE username =?";
 					statement = conn.prepareStatement(reset);
 					statement.setString(1, logIn.randomString());
-					statement.setString(2, userData.username);
+					statement.setString(2, userData.getUsername());
 					statement.executeUpdate();
 					
 				}
@@ -92,17 +92,17 @@ public class UserFunction {
 		Integer register = 0;
 		
 		// Melakukan pengecekan validitas email
-		if (userData.email.contains("@")) {
+		if (userData.getEmail().contains("@")) {
 			
 			//	Melakukan pengecekan password
-			if(userData.password.equals(confirm)) {
+			if(userData.getPassword().equals(confirm)) {
 			
 				try {
 					
 					// Melakukan pengecekan username sudah tersedia atau belum
 					String cek = "SELECT username FROM user WHERE username = ?";
 					statement = conn.prepareStatement(cek);
-					statement.setString(1, userData.username);
+					statement.setString(1, userData.getUsername());
 					ResultSet resultCek = statement.executeQuery();
 							
 					if (resultCek.next()) {
@@ -114,10 +114,10 @@ public class UserFunction {
 						
 						String query = "INSERT INTO user VALUES (?,?,?,?)";
 						statement = conn.prepareStatement(query);
-						statement.setString(1, userData.username);
-						statement.setString(2, userData.date);
-						statement.setString(3, userData.email);
-						statement.setString(4, userData.password);
+						statement.setString(1, userData.getUsername());
+						statement.setString(2, userData.getDate());
+						statement.setString(3, userData.getEmail());
+						statement.setString(4, userData.getPassword());
 						register = statement.executeUpdate();
 
 					}
@@ -153,18 +153,18 @@ public class UserFunction {
 		Integer update = 0;
 		User user = new User();
 		
-		if (passwordLama.equals(UserData.pass)) {
+		if (passwordLama.equals(userData.getPass())) {
 
 			try {
 				
 				String query = "UPDATE user SET password=? WHERE username=?";
 				statement = conn.prepareStatement(query);
 				statement.setString(1, passwordBaru);
-				statement.setString(2, UserData.usr);
+				statement.setString(2, userData.getUser());
 				update = statement.executeUpdate();
 				
 				if(update == 1) {
-					UserData.pass = passwordBaru;
+					userData.setPass(passwordBaru);
 				}
 				
 			} catch (SQLException e) {
@@ -192,7 +192,7 @@ public class UserFunction {
 			
 			String query = "DELETE FROM user WHERE username=?";
 			statement = conn.prepareStatement(query);
-			statement.setString(1, UserData.usr);
+			statement.setString(1, userData.getUser());
 			delete = statement.executeUpdate();
 			
 		} catch (SQLException e) {

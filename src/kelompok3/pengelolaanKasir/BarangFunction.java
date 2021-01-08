@@ -38,48 +38,62 @@ public class BarangFunction {
 	public Integer tambahBarang(BarangData barangData) {
 		
 		Integer insert = 0;
-		Integer i;
+		Integer i = 1;
 		
-		try {
+		if(barangData.getStock()>0 && barangData.getBeli()>0 && barangData.getJual()>0) {
 			
-			//	cek nama barang
-			String cek = "SELECT nama FROM barang WHERE nama=?";
-			statement = conn.prepareStatement(cek);
-			statement.setString(1, barangData.nama);
-			ResultSet rscek = statement.executeQuery();
-			
-			if(!rscek.next()) {
+			try {
 				
-				String ambilsku = "SELECT sku FROM barang WHERE sku IN (SELECT MAX(sku) FROM barang)";
-				stmt= conn.createStatement();
-				ResultSet result = stmt.executeQuery(ambilsku);
+				//	cek nama barang
+				String cek = "SELECT nama FROM barang WHERE nama=?";
+				statement = conn.prepareStatement(cek);
+				statement.setString(1, barangData.getNama());
+				ResultSet rscek = statement.executeQuery();
 				
-				if(result.next()) {
-					String dapatsku = result.getString("sku");
-					String sku = dapatsku.substring(2);
-					i = Integer.parseInt(sku);
-					i++;
+				if(!rscek.next()) {
+					
+					String ambilsku = "SELECT sku FROM barang "
+							+ "ORDER BY CAST(SUBSTRING(sku,3) AS INT) ASC";
+					stmt= conn.createStatement();
+					ResultSet result = stmt.executeQuery(ambilsku);
+					
+					while(result.next()) {
+						
+						String dapatsku = result.getString("sku");
+						String sku = dapatsku.substring(2);
+						
+						if(i!=Integer.parseInt(sku)) {
+							break;
+						}
+						
+						i++;
+						
+					}
+					
+					String skufix = "BR" + i.toString();
+					
+					String query = "INSERT INTO barang VALUES(?,?,?,?,?)";
+					statement = conn.prepareStatement(query);
+					statement.setString(1, skufix);
+					statement.setString(2, barangData.getNama());
+					statement.setInt(3, barangData.getStock());
+					statement.setInt(4, barangData.getBeli());
+					statement.setInt(5, barangData.getJual());
+					insert = statement.executeUpdate();
+					
 				} else {
-					i=1;
+					System.out.println("Barang sudah terdaftar");
 				}
 				
-				String skufix = "B0" + i.toString();
-				
-				String query = "INSERT INTO barang VALUES(?,?,?,?,?)";
-				statement = conn.prepareStatement(query);
-				statement.setString(1, skufix);
-				statement.setString(2, barangData.nama);
-				statement.setInt(3, barangData.stock);
-				statement.setInt(4, barangData.harga_beli);
-				statement.setInt(5, barangData.harga_jual);
-				insert = statement.executeUpdate();
-				
-			} else {
-				System.out.println("Barang sudah terdaftar");
+			} catch (SQLException e) {
+				System.out.println("Terjadi kesalahan");
+				e.printStackTrace();
 			}
 			
-		} catch (SQLException e) {
-			System.out.println("Terjadi kesalahan");
+		} else if(barangData.getStock()<=0) {
+			System.out.println("Stock tidak boleh kecil sama dari 0");
+		} else if(barangData.getBeli()<=0 && barangData.getJual()<=0) {
+			System.out.println("Harga tidak boleh kecil sama dari 0");
 		}
 		
 		return insert;
@@ -92,17 +106,23 @@ public class BarangFunction {
 		
 		Integer update = 0;
 		
-		try {
+		if(barangData.getJual()>0) {
 			
-			String query = "UPDATE barang SET nama=?, harga_jual=? WHERE sku=?";
-			statement = conn.prepareStatement(query);
-			statement.setString(1, barangData.nama);
-			statement.setInt(2, barangData.harga_jual);
-			statement.setString(3, barangData.sku);
-			update = statement.executeUpdate();
+			try {
+				
+				String query = "UPDATE barang SET nama=?, harga_jual=? WHERE sku=?";
+				statement = conn.prepareStatement(query);
+				statement.setString(1, barangData.getNama());
+				statement.setInt(2, barangData.getJual());
+				statement.setString(3, barangData.getSku());
+				update = statement.executeUpdate();
+				
+			} catch (SQLException e) {
+				System.out.println("Terjadi kesalahan");
+			}
 			
-		} catch (SQLException e) {
-			System.out.println("Terjadi kesalahan");
+		} else {
+			System.out.println("Harga tidak boleh kecil sama dari 0");
 		}
 		
 		return update;

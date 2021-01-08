@@ -39,7 +39,7 @@ public class Transaksi implements Kelola {
 		do {
 			
 			System.out.print("Nama Barang : ");
-			String nama = scn.next();
+			String nama = scn.nextLine();
 			String namafix = nama.substring(0, 1).toUpperCase() + nama.substring(1);
 			
 			System.out.print("Jumlah : ");
@@ -47,8 +47,12 @@ public class Transaksi implements Kelola {
 			
 			jual.put(namafix, jumlah);
 			
+			scn.nextLine();
+			
 			System.out.print("Ada lagi??..(y/t)");
 			ada = scn.next();
+			
+			scn.nextLine();
 			
 		} while(ada.equalsIgnoreCase("y"));
 		
@@ -74,8 +78,10 @@ public class Transaksi implements Kelola {
 		System.out.print("Noresi : ");
 		String noresi = scn.next().toUpperCase();
 		
+		scn.nextLine();
+		
 		System.out.print("Nama Barang : ");
-		String nama = scn.next();
+		String nama = scn.nextLine();
 		String namafix = nama.substring(0, 1).toUpperCase() + nama.substring(1);
 		
 		System.out.print("Jumlah barang : ");
@@ -134,17 +140,17 @@ public class Transaksi implements Kelola {
         
         for(TransaksiData list : listcari) {
         	
-        	System.out.print(list.noresi);
+        	System.out.print(list.getNoresi());
             System.out.print("\t");
-            System.out.print(list.username);
+            System.out.print(list.getUsername());
             System.out.print("\t\t");
-            System.out.print(list.date);
+            System.out.print(list.getDate());
             System.out.print("\t");
-            System.out.print(list.namaBarang);
+            System.out.print(list.getNamaBarang());
             System.out.print("\t\t");
-            System.out.print(list.jumlah);
+            System.out.print(list.getJumlah());
             System.out.print("\t\t");
-            System.out.println(list.total);
+            System.out.println(list.getTotal());
         	
         }
         
@@ -173,17 +179,17 @@ public class Transaksi implements Kelola {
         
         for(TransaksiData list : listTransaksi) {
         	
-        	System.out.print(list.noresi);
+        	System.out.print(list.getNoresi());
             System.out.print("\t");
-            System.out.print(list.username);
+            System.out.print(list.getUsername());
             System.out.print("\t\t");
-            System.out.print(list.date);
+            System.out.print(list.getDate());
             System.out.print("\t");
-            System.out.print(list.namaBarang);
+            System.out.print(list.getNamaBarang());
             System.out.print("\t\t");
-            System.out.print(list.jumlah);
+            System.out.print(list.getJumlah());
             System.out.print("\t\t");
-            System.out.println(list.total);
+            System.out.println(list.getTotal());
         	
         }
 		

@@ -2,14 +2,14 @@ package kelompok3.pengelolaanKasir;
 
 public class TransaksiData {
 
-	String noresi;
-	String sku;
-	String username;
-	String date; 
-	String namaBarang; 
-	Integer jumlah;
-	Integer total;
-	static Integer stock;
+	private String noresi;
+	private String sku;
+	private String username;
+	private String date; 
+	private String namaBarang; 
+	private Integer jumlah;
+	private Integer total;
+	private static Integer stock;
 	
 	public TransaksiData() {
 		
@@ -35,6 +35,38 @@ public class TransaksiData {
 		this.namaBarang=nama;
 		this.jumlah=jumlah;
 		this.total=harga;
+	}
+
+	public String getNoresi() {
+		return this.noresi;
+	}
+
+	public String getSku() {
+		return this.sku;
+	}
+
+	public String getUsername() {
+		return this.username;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public String getNamaBarang() {
+		return namaBarang;
+	}
+
+	public Integer getTotal() {
+		return total;
+	}
+
+	public Integer getJumlah() {
+		return jumlah;
+	}
+
+	public static Integer getStock() {
+		return stock;
 	}
 	
 }

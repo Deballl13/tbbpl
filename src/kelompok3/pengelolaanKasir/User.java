@@ -91,11 +91,11 @@ public class User implements Kelola{
         System.out.println("Email");
 		
 		for(UserData userData : searchList){
-            System.out.print(userData.username);
+            System.out.print(userData.getUsername());
             System.out.print("\t\t");
-            System.out.print(userData.date);
+            System.out.print(userData.getDate());
             System.out.print("\t\t");
-            System.out.println(userData.email);
+            System.out.println(userData.getEmail());
         }
 		
 		Menu.tunggu();
@@ -121,9 +121,9 @@ public class User implements Kelola{
             
             System.out.print(list.getKey());
             System.out.print("\t\t");
-            System.out.print(listUser.date);
+            System.out.print(listUser.getDate());
             System.out.print("\t\t");
-            System.out.println(listUser.email);
+            System.out.println(listUser.getEmail());
         }
 		
 		Menu.tunggu();

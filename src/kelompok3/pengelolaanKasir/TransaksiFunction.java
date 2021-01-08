@@ -17,6 +17,7 @@ public class TransaksiFunction {
 	static Statement stmt;
 	static PreparedStatement statement;
 	TransaksiData transaksiData;
+	UserData userData = new UserData();
 
 	public TransaksiFunction(){
 		
@@ -34,23 +35,28 @@ public class TransaksiFunction {
 	public Integer tambah(String date, TreeMap<String, Integer> jual) {
 		
 		Integer tambah = 0; 
-		Integer i;
+		Integer i = 1;
 		Integer total = 0;
 		
 		try {
 			
 			//	cek nomor resi terakhir
-			String ambilresi = "SELECT noresi FROM transaksi WHERE noresi IN (SELECT MAX(noresi) FROM transaksi)";
+			String ambilresi = "SELECT noresi FROM transaksi "
+					+ "ORDER BY CAST(SUBSTRING(noresi,2) AS INT) ASC";
 			stmt= conn.createStatement();
 			ResultSet result = stmt.executeQuery(ambilresi);
 			
-			if(result.next()) {
+			while(result.next()) {
+				
 				String dapatresi = result.getString("noresi");
 				String noresi = dapatresi.substring(1);
-				i = Integer.parseInt(noresi);
+				
+				if(i!=Integer.parseInt(noresi)) {
+					break;
+				}
+				
 				i++;
-			} else {
-				i=1;
+				
 			}
 			
 			String noresifix = "T" + i.toString();
@@ -59,7 +65,7 @@ public class TransaksiFunction {
 			statement = conn.prepareStatement(query);
 			statement.setString(1, noresifix);
 			statement.setString(2, date);
-			statement.setString(3, UserData.usr);
+			statement.setString(3, userData.getUser());
 			statement.executeUpdate();
 			
 			for(Map.Entry list : jual.entrySet()) {
@@ -69,25 +75,31 @@ public class TransaksiFunction {
 				statement = conn.prepareStatement(ambilsku);
 				statement.setString(1, (String) list.getKey());
 				ResultSet rs = statement.executeQuery();
-				rs.next();
-				
-				// memasukkan data ke tabel detail
-				String sql = "INSERT INTO detail_transaksi(sku, noresi, jumlah, harga) VALUES(?,?,?,?)";
-				statement = conn.prepareStatement(sql);
-				statement.setString(1, rs.getString("sku"));
-				statement.setString(2, noresifix);
-				statement.setInt(3, (Integer) list.getValue());
-				statement.setInt(4, rs.getInt("harga_jual")*(Integer) list.getValue());
-				tambah = statement.executeUpdate();
-				
-				total += (rs.getInt("harga_jual")*(Integer) list.getValue());
-				
-				//	mengurangi jumlah stock
-				String stock = "UPDATE barang SET stock=? WHERE sku=?";
-				statement = conn.prepareStatement(stock);
-				statement.setInt(1, rs.getInt("stock")-(Integer) list.getValue());
-				statement.setString(2, rs.getString("sku"));
-				statement.executeUpdate();
+				if(rs.next() && rs.getInt("stock")>0 && (rs.getInt("stock") - (Integer) list.getValue())>0) {
+					
+					// memasukkan data ke tabel detail
+					String sql = "INSERT INTO detail_transaksi(sku, noresi, jumlah, harga) VALUES(?,?,?,?)";
+					statement = conn.prepareStatement(sql);
+					statement.setString(1, rs.getString("sku"));
+					statement.setString(2, noresifix);
+					statement.setInt(3, (Integer) list.getValue());
+					statement.setInt(4, rs.getInt("harga_jual")*(Integer) list.getValue());
+					tambah = statement.executeUpdate();
+					
+					total += (rs.getInt("harga_jual")*(Integer) list.getValue());
+					
+					//	mengurangi jumlah stock
+					String stock = "UPDATE barang SET stock=? WHERE sku=?";
+					statement = conn.prepareStatement(stock);
+					statement.setInt(1, rs.getInt("stock")-(Integer) list.getValue());
+					statement.setString(2, rs.getString("sku"));
+					statement.executeUpdate();
+					
+				} else if(rs.next() && rs.getInt("stock")<=0 && (rs.getInt("stock") - (Integer) list.getValue())<=0){
+					System.out.println("Stock " + list.getKey() + " tidak mencukupi");
+				}else {
+					System.out.println(list.getKey() + " tidak ada");
+				}
 				
 			}
 			
@@ -209,14 +221,14 @@ public class TransaksiFunction {
 			//	cek sku dari barang
 			String stock = "SELECT sku, stock FROM barang WHERE nama=?";
 			statement = conn.prepareStatement(stock);
-			statement.setString(1, transaksiData.namaBarang);
+			statement.setString(1, transaksiData.getNamaBarang());
 			ResultSet rsstock = statement.executeQuery();
 			rsstock.next();
 			
 			//	cek sku dan jumlah
 			String cek = "SELECT jumlah, sku FROM detail_transaksi WHERE noresi=? AND sku=?";
 			statement = conn.prepareStatement(cek);
-			statement.setString(1, transaksiData.noresi);
+			statement.setString(1, transaksiData.getNoresi());
 			statement.setString(2, rsstock.getString("sku"));
 			ResultSet rscek = statement.executeQuery();
 			
@@ -224,28 +236,28 @@ public class TransaksiFunction {
 				
 				String query = "UPDATE detail_transaksi SET jumlah=? WHERE noresi=? AND sku=?";
 				statement = conn.prepareStatement(query);
-				statement.setInt(1, transaksiData.jumlah);
-				statement.setString(2, transaksiData.noresi);
+				statement.setInt(1, transaksiData.getJumlah());
+				statement.setString(2, transaksiData.getNoresi());
 				statement.setString(3, rsstock.getString("sku"));
 				edit = statement.executeUpdate();
 				
-				if(transaksiData.jumlah > rscek.getInt("jumlah")) {
+				if(transaksiData.getJumlah() > rscek.getInt("jumlah")) {
 					
 					String barang = "UPDATE barang SET stock=? WHERE nama=?";
 					statement = conn.prepareStatement(barang);
-					statement.setInt(1, rsstock.getInt("stock") - (transaksiData.jumlah-rscek.getInt("jumlah")));
-					statement.setString(2, transaksiData.namaBarang);
+					statement.setInt(1, rsstock.getInt("stock") - (transaksiData.getJumlah()-rscek.getInt("jumlah")));
+					statement.setString(2, transaksiData.getNamaBarang());
 					statement.executeUpdate();
 					
-				} else if(transaksiData.jumlah < rscek.getInt("jumlah")) {
+				} else if(transaksiData.getJumlah() < rscek.getInt("jumlah")) {
 					
 					String barang = "UPDATE barang SET stock=? WHERE nama=?";
 					statement = conn.prepareStatement(barang);
-					statement.setInt(1, rsstock.getInt("stock") + (rscek.getInt("jumlah")-transaksiData.jumlah));
-					statement.setString(2, transaksiData.namaBarang);
+					statement.setInt(1, rsstock.getInt("stock") + (rscek.getInt("jumlah")-transaksiData.getJumlah()));
+					statement.setString(2, transaksiData.getNamaBarang());
 					statement.executeUpdate();
 					
-				} else if (transaksiData.jumlah == rscek.getInt("jumlah")) {
+				} else if (transaksiData.getJumlah() == rscek.getInt("jumlah")) {
 					System.out.println("Jumlah barang sama saja");
 				}
 				

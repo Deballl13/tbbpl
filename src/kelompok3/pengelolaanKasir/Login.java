@@ -8,8 +8,8 @@ public class Login{
 	
 	Scanner scn = new Scanner(System.in);
 	Date date = new Date();
-	UserData userData;
-	UserFunction userFunction;
+	private UserData userData;
+	private UserFunction userFunction;
 	Random random = new Random();
 	static Integer ulang = 2;
 	private String username1 = null, username2 = null, username3 = null;

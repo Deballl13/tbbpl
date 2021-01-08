@@ -1,4 +1,5 @@
-Keuntungan tanggal 2 = 3250000
-Keuntungan tanggal 7 = 100000
-Keuntungan tanggal 15 = 1100000
-Keuntungan tanggal 20 = 400000
+Keuntungan tanggal 2 = 33000
+Keuntungan tanggal 3 = 80000
+Keuntungan tanggal 7 = 74500
+Keuntungan tanggal 20 = 11500
+Keuntungan tanggal 22 = 145000
