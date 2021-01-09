@@ -49,4 +49,8 @@ public class BarangData {
 		return this.harga_jual;
 	}
 	
+	public void setJual(Integer jual) {
+		this.harga_jual=jual;
+	}
+	
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 22, 2020 at 02:03 AM
+-- Generation Time: Jan 09, 2021 at 11:05 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -41,11 +41,17 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`sku`, `nama`, `stock`, `harga_beli`, `harga_jual`) VALUES
-('B01', 'Susu', 29, 4500, 7000),
-('B02', 'Kopi', 90, 7000, 10000),
-('B03', 'Teh', 61, 3000, 5000),
-('B04', 'Energen', 54, 5000, 8500),
-('B05', 'Milo', 50, 100000, 140000);
+('BR1', 'Teh kotak', 63, 2500, 5000),
+('BR10', 'Neocoffee tiramisu', 30, 1000, 1500),
+('BR11', 'Teh sosro', 8, 5000, 7000),
+('BR2', 'Indomilk cokelat', 68, 3000, 5000),
+('BR3', 'Indomilk vanilla', 10, 2000, 4500),
+('BR4', 'Milo cokelat', 19, 3500, 5000),
+('BR5', 'Milo vanilla', 35, 4000, 5500),
+('BR6', 'Roti manis', 32, 8000, 10000),
+('BR7', 'Roti cokelat', 45, 8000, 10000),
+('BR8', 'Energen jahe', 10, 2000, 3500),
+('BR9', 'Energen cokelat', 32, 1500, 2500);
 
 -- --------------------------------------------------------
 
@@ -66,20 +72,33 @@ CREATE TABLE `detail_transaksi` (
 --
 
 INSERT INTO `detail_transaksi` (`id`, `sku`, `noresi`, `jumlah`, `harga`) VALUES
-(48, 'B04', 'T1', 3, 25500),
-(49, 'B02', 'T1', 2, 20000),
-(50, 'B05', 'T2', 2, 280000),
-(51, 'B02', 'T3', 5, 50000),
-(52, 'B01', 'T3', 10, 70000),
-(53, 'B03', 'T3', 5, 25000),
-(54, 'B02', 'T4', 3, 30000),
-(55, 'B01', 'T4', 3, 21000),
-(56, 'B04', 'T5', 3, 25500),
-(57, 'B01', 'T5', 5, 35000),
-(58, 'B03', 'T5', 2, 10000),
-(59, 'B01', 'T6', 3, 21000),
-(60, 'B03', 'T6', 2, 10000),
-(61, 'B05', 'T7', 3, 420000);
+(107, 'BR6', 'T1', 1, 10000),
+(108, 'BR11', 'T1', 3, 21000),
+(109, 'BR4', 'T2', 5, 25000),
+(110, 'BR1', 'T2', 5, 25000),
+(111, 'BR9', 'T3', 3, 7500),
+(112, 'BR2', 'T3', 2, 10000),
+(113, 'BR6', 'T3', 1, 10000),
+(114, 'BR9', 'T4', 5, 12500),
+(115, 'BR6', 'T4', 2, 20000),
+(116, 'BR9', 'T5', 3, 7500),
+(117, 'BR8', 'T5', 6, 21000),
+(118, 'BR9', 'T6', 3, 7500),
+(119, 'BR9', 'T7', 2, 5000),
+(120, 'BR8', 'T8', 5, 17500),
+(121, 'BR5', 'T8', 7, 38500),
+(122, 'BR7', 'T8', 3, 30000),
+(123, 'BR6', 'T8', 1, 10000),
+(124, 'BR5', 'T9', 3, 16500),
+(125, 'BR7', 'T9', 3, 30000),
+(126, 'BR6', 'T9', 1, 10000),
+(127, 'BR8', 'T10', 5, 17500),
+(128, 'BR4', 'T10', 3, 15000),
+(129, 'BR5', 'T10', 2, 11000),
+(130, 'BR6', 'T10', 1, 10000),
+(131, 'BR1', 'T10', 7, 35000),
+(132, 'BR6', 'T11', 1, 10000),
+(133, 'BR11', 'T11', 2, 14000);
 
 -- --------------------------------------------------------
 
@@ -98,13 +117,17 @@ CREATE TABLE `transaksi` (
 --
 
 INSERT INTO `transaksi` (`noresi`, `tanggal`, `username`) VALUES
-('T1', '2020-12-02', 'fauzan'),
-('T2', '2020-12-03', 'fauzan'),
-('T3', '2020-12-07', 'fauzan'),
-('T4', '2020-12-02', 'fauzan'),
-('T5', '2020-12-07', 'fauzan'),
-('T6', '2020-12-20', 'fauzan'),
-('T7', '2020-12-20', 'fauzan');
+('T1', '2021-01-09', 'fathia'),
+('T10', '2021-01-10', 'fathia'),
+('T11', '2021-01-10', 'debal'),
+('T2', '2021-01-09', 'fathia'),
+('T3', '2021-01-09', 'debal'),
+('T4', '2021-01-09', 'fathia'),
+('T5', '2021-01-09', 'fathia'),
+('T6', '2021-01-09', 'fathia'),
+('T7', '2021-01-10', 'debal'),
+('T8', '2021-01-10', 'fathia'),
+('T9', '2021-01-10', 'fathia');
 
 -- --------------------------------------------------------
 
@@ -124,8 +147,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`username`, `login_terakhir`, `email`, `password`) VALUES
-('debal', '2020-12-22', 'debal@gmail.com', 'sandbox'),
-('fathia', '2020-12-22', 'fathia@gmail.com', 'fathia123'),
+('debal', '2021-01-10', 'debal@unand.id', 'sandbox'),
+('fathia', '2021-01-10', 'fathia@gmail.com', 'fathia123'),
 ('fauzan', '2020-12-22', 'fauzan@gmail.com', 'fauzan123'),
 ('gita', '2020-12-22', 'gita@gmail.com', 'gita123');
 
@@ -168,7 +191,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `detail_transaksi`
 --
 ALTER TABLE `detail_transaksi`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
 
 --
 -- Constraints for dumped tables

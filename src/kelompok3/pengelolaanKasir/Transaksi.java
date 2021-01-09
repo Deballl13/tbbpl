@@ -1,5 +1,6 @@
 package kelompok3.pengelolaanKasir;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -10,9 +11,10 @@ public class Transaksi implements Kelola {
 	
 	Date date = new Date();
 	Scanner scn = new Scanner(System.in);
-	TransaksiData transaksiData;
+	TransaksiData transaksiData = new TransaksiData();
 	TransaksiFunction transaksiFunction;
 	Barang barang;
+	NumberFormat format = NumberFormat.getCurrencyInstance();
 	
 	public Transaksi() {
 		try {
@@ -59,8 +61,15 @@ public class Transaksi implements Kelola {
 		if(ada.equalsIgnoreCase("t")) {
 		
 			if(transaksiFunction.tambah(dt, jual) == 1) {
-				jual.clear();
-				System.out.println("Transaksi berhasil ditambahkan");
+				System.out.println("Total : " + format.format(transaksiFunction.getTotal()));
+				
+				System.out.print("Jumlah uang : ");
+				Integer uang = scn.nextInt();
+				
+				Faktur faktur = new Faktur();
+				faktur.invoice(transaksiFunction.getNoresi(), transaksiFunction.nama, 
+						transaksiFunction.jumlah, transaksiFunction.harga, 
+						transaksiFunction.getTotal(), uang, transaksiFunction.getIndex());
 				Menu.menuDashboard();
 			}
 			
@@ -150,7 +159,7 @@ public class Transaksi implements Kelola {
             System.out.print("\t\t");
             System.out.print(list.getJumlah());
             System.out.print("\t\t");
-            System.out.println(list.getTotal());
+            System.out.println(list.getHarga());
         	
         }
         
@@ -189,7 +198,7 @@ public class Transaksi implements Kelola {
             System.out.print("\t\t");
             System.out.print(list.getJumlah());
             System.out.print("\t\t");
-            System.out.println(list.getTotal());
+            System.out.println(list.getHarga());
         	
         }
 		

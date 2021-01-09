@@ -9,19 +9,19 @@ public class TransaksiData {
 	private String namaBarang; 
 	private Integer jumlah;
 	private Integer total;
-	private static Integer stock;
+	private Integer harga;
 	
 	public TransaksiData() {
 		
 	}
 	
-	public TransaksiData(String noresi, String username, String date, String nama, Integer jumlah, Integer total) {
+	public TransaksiData(String noresi, String username, String date, String nama, Integer jumlah, Integer harga) {
 		this.noresi=noresi;
 		this.username=username;
 		this.date=date;
 		this.namaBarang=nama;
 		this.jumlah=jumlah;
-		this.total=total;
+		this.harga=harga;
 	}
 	
 	public TransaksiData(String noresi, String nama, Integer jumlah) {
@@ -30,19 +30,19 @@ public class TransaksiData {
 		this.jumlah=jumlah;
 	}
 	
-	public TransaksiData(String sku, String nama, Integer jumlah, Integer harga) {
+	public TransaksiData(String sku, String nama, Integer jumlah, Integer total) {
 		this.sku=sku;
 		this.namaBarang=nama;
 		this.jumlah=jumlah;
-		this.total=harga;
+		this.total=total;
 	}
 
 	public String getNoresi() {
 		return this.noresi;
 	}
-
-	public String getSku() {
-		return this.sku;
+	
+	public void setNoresi(String noresi) {
+		this.noresi=noresi;
 	}
 
 	public String getUsername() {
@@ -60,13 +60,27 @@ public class TransaksiData {
 	public Integer getTotal() {
 		return total;
 	}
+	
+	public void setTotal(Integer total) {
+		
+		if(this.total==null) {
+			this.total=total;
+		} else {
+			this.total+=total;
+		}
+		
+	}
 
 	public Integer getJumlah() {
 		return jumlah;
 	}
-
-	public static Integer getStock() {
-		return stock;
+	
+	public String sku(){
+		return this.sku;
+	}
+	
+	public Integer getHarga() {
+		return this.harga;
 	}
 	
 }
