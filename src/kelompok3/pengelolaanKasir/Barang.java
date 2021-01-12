@@ -1,5 +1,7 @@
 package kelompok3.pengelolaanKasir;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
@@ -10,9 +12,18 @@ public class Barang implements Kelola{
 	Scanner scn = new Scanner(System.in);
 	BarangData barangData; // mendeklarasikan variabel barangData dengan tipe data BarangData
 	BarangFunction barangFunction;
+	DecimalFormat format = (DecimalFormat) DecimalFormat.getCurrencyInstance();
+	DecimalFormatSymbols simbol = new DecimalFormatSymbols();
 	
 	// constructor
 	public Barang() {
+		
+		//	Simbol mata uang
+		simbol.setCurrencySymbol("Rp. ");
+		simbol.setMonetaryDecimalSeparator(',');
+		simbol.setGroupingSeparator('.');
+		format.setDecimalFormatSymbols(simbol);
+		
 		try {
 			barangFunction = new BarangFunction();
 		} catch (NullPointerException e) {
@@ -110,6 +121,8 @@ public class Barang implements Kelola{
         System.out.print("Harga Beli");
         System.out.print("\t");
         System.out.println("Harga Jual");
+        System.out.println("----------------------------------------"
+        		+ "-------------------------------------");
 		
 		for(BarangData barangData : searchList){
             System.out.print(barangData.getSku());
@@ -118,9 +131,9 @@ public class Barang implements Kelola{
             System.out.print("\t\t");
             System.out.print(barangData.getStock());
             System.out.print("\t\t");
-            System.out.print(barangData.getBeli());
+            System.out.print(format.format(barangData.getBeli()));
             System.out.print("\t\t");
-            System.out.println(barangData.getJual());
+            System.out.println(format.format(barangData.getJual()));
         }
 		
 		Menu.tunggu();
@@ -143,6 +156,8 @@ public class Barang implements Kelola{
         System.out.print("Harga Beli");
         System.out.print("\t");
         System.out.println("Harga Jual");
+        System.out.println("----------------------------------------"
+        		+ "-------------------------------------");
         
         for(Map.Entry list : daftar.entrySet()){
             BarangData listUser = (BarangData) list.getValue();
@@ -153,9 +168,9 @@ public class Barang implements Kelola{
             System.out.print("\t\t");
             System.out.print(listUser.getStock());
             System.out.print("\t\t");
-            System.out.print(listUser.getBeli());
+            System.out.print(format.format(listUser.getBeli()));
             System.out.print("\t\t");
-            System.out.println(listUser.getJual());
+            System.out.println(format.format(listUser.getJual()));
             
         }
 		

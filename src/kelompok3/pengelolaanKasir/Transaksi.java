@@ -1,5 +1,7 @@
 package kelompok3.pengelolaanKasir;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,9 +16,18 @@ public class Transaksi implements Kelola {
 	TransaksiData transaksiData = new TransaksiData();
 	TransaksiFunction transaksiFunction;
 	Barang barang;
-	NumberFormat format = NumberFormat.getCurrencyInstance();
+	
+	DecimalFormat format = (DecimalFormat) DecimalFormat.getCurrencyInstance();
+	DecimalFormatSymbols simbol = new DecimalFormatSymbols();
 	
 	public Transaksi() {
+		
+		//	Simbol mata uang
+		simbol.setCurrencySymbol("Rp. ");
+		simbol.setMonetaryDecimalSeparator(',');
+		simbol.setGroupingSeparator('.');
+		format.setDecimalFormatSymbols(simbol);
+		
 		try {
 			transaksiFunction = new TransaksiFunction();
 		} catch (NullPointerException e) {
@@ -142,10 +153,12 @@ public class Transaksi implements Kelola {
         System.out.print("Tanggal");
         System.out.print("\t\t");
         System.out.print("Nama Barang");
-        System.out.print("\t");
+        System.out.print("\t\t");
         System.out.print("Jumlah");
         System.out.print("\t\t");
         System.out.println("Total");
+        System.out.println("------------------------------------------"
+        		+ "-----------------------------------------------------");
         
         for(TransaksiData list : listcari) {
         	
@@ -159,7 +172,7 @@ public class Transaksi implements Kelola {
             System.out.print("\t\t");
             System.out.print(list.getJumlah());
             System.out.print("\t\t");
-            System.out.println(list.getHarga());
+            System.out.println(format.format(list.getHarga()));
         	
         }
         
@@ -181,10 +194,12 @@ public class Transaksi implements Kelola {
         System.out.print("Tanggal");
         System.out.print("\t\t");
         System.out.print("Nama Barang");
-        System.out.print("\t");
+        System.out.print("\t\t");
         System.out.print("Jumlah");
         System.out.print("\t\t");
         System.out.println("Total");
+        System.out.println("------------------------------------------"
+        		+ "-----------------------------------------------------");
         
         for(TransaksiData list : listTransaksi) {
         	
@@ -198,7 +213,7 @@ public class Transaksi implements Kelola {
             System.out.print("\t\t");
             System.out.print(list.getJumlah());
             System.out.print("\t\t");
-            System.out.println(list.getHarga());
+            System.out.println(format.format(list.getHarga()));
         	
         }
 		

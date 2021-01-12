@@ -1,5 +1,7 @@
 package kelompok3.pengelolaanKasir;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,16 +15,23 @@ public class Faktur {
 	TransaksiData transaksiData = new TransaksiData();
 	TransaksiFunction transaksiFunction = new TransaksiFunction();
 	BarangData barangData = new BarangData();
-	NumberFormat format = NumberFormat.getCurrencyInstance();
+	DecimalFormat format = (DecimalFormat) DecimalFormat.getCurrencyInstance();
+	DecimalFormatSymbols simbol = new DecimalFormatSymbols();
 	
 	public void invoice(String noresi, String[] nama, Integer[] jumlah, Integer[] harga, 
 			Integer total, Integer uang, Integer index) {
+		
+		//	Simbol mata uang
+		simbol.setCurrencySymbol("Rp. ");
+		simbol.setMonetaryDecimalSeparator(',');
+		simbol.setGroupingSeparator('.');
+		format.setDecimalFormatSymbols(simbol);	
 		
 		System.out.println("\n--INVOICE--");
 		System.out.println("-----------");
 		System.out.println("noresi : " + noresi);
 		System.out.println("List Barang : ");
-		System.out.println(nama.length);
+		System.out.println("---------------------------------------");
 		
 		for(int i=0; i<index; i++) {
 			
@@ -32,11 +41,12 @@ public class Faktur {
 			
 		}
 		
-		System.out.println("Grand Total :   " + format.format(total));
-		System.out.println("Jumlah Uang :   " + format.format(uang));
+		System.out.println("---------------------------------------");
+		System.out.println("Grand Total :   \t" + format.format(total));
+		System.out.println("Jumlah Uang :   \t" + format.format(uang));
 		
 		Integer kembalian = uang-total;
-		System.out.println("Kembalian   :   " + format.format(kembalian));
+		System.out.println("Kembalian   :   \t" + format.format(kembalian));
 		
 	}
 	

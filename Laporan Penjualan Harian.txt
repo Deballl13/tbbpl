@@ -1,28 +1,38 @@
-Tanggal 2020-12-02
-SKU	Nama Barang	Jumlah		Total Penjualan
-B01	Susu		3		21000
-B02	Kopi		5		50000
-B04	Energen		3		25500
+Tanggal 2021-01-09
+SKU	Nama Barang		Jumlah		Total Penjualan
+------------------------------------------------------------------
+BR1	Teh kotak		5		Rp. 25.000,00
+BR11	Teh sosro		3		Rp. 21.000,00
+BR2	Indomilk cokelat		2		Rp. 10.000,00
+BR4	Milo cokelat		5		Rp. 25.000,00
+BR6	Roti manis		4		Rp. 40.000,00
+BR8	Energen jahe		6		Rp. 21.000,00
+BR9	Energen cokelat		14		Rp. 35.000,00
+Total 						Rp. 177.000,00
 
-Tanggal 2020-12-03
-SKU	Nama Barang	Jumlah		Total Penjualan
-B05	Milo		2		280000
+Tanggal 2021-01-10
+SKU	Nama Barang		Jumlah		Total Penjualan
+------------------------------------------------------------------
+BR1	Teh kotak		7		Rp. 35.000,00
+BR11	Teh sosro		2		Rp. 14.000,00
+BR4	Milo cokelat		3		Rp. 15.000,00
+BR5	Milo vanilla		12		Rp. 66.000,00
+BR6	Roti manis		4		Rp. 40.000,00
+BR7	Roti cokelat		6		Rp. 60.000,00
+BR8	Energen jahe		10		Rp. 35.000,00
+BR9	Energen cokelat		2		Rp. 5.000,00
+Total 						Rp. 270.000,00
 
-Tanggal 2020-12-07
-SKU	Nama Barang	Jumlah		Total Penjualan
-B01	Susu		14		105000
-B02	Kopi		5		50000
-B03	Teh		7		35000
-B04	Energen		3		25500
-
-Tanggal 2020-12-20
-SKU	Nama Barang	Jumlah		Total Penjualan
-B01	Susu		3		21000
-B03	Teh		2		10000
-
-Tanggal 2020-12-22
-SKU	Nama Barang	Jumlah		Total Penjualan
-B02	Kopi		7		70000
-B03	Teh		2		10000
-B05	Milo		3		420000
+Tanggal 2021-01-12
+SKU	Nama Barang		Jumlah		Total Penjualan
+------------------------------------------------------------------
+BR1	Teh kotak		3		Rp. 15.000,00
+BR11	Teh sosro		2		Rp. 14.000,00
+BR2	Indomilk cokelat		2		Rp. 10.000,00
+BR3	Indomilk vanilla		3		Rp. 13.500,00
+BR4	Milo cokelat		2		Rp. 10.000,00
+BR5	Milo vanilla		3		Rp. 16.500,00
+BR6	Roti manis		10		Rp. 100.000,00
+BR8	Energen jahe		3		Rp. 10.500,00
+Total 						Rp. 189.500,00
 

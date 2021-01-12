@@ -1,5 +1,3 @@
-Keuntungan tanggal 2 = 33000
-Keuntungan tanggal 3 = 80000
-Keuntungan tanggal 7 = 74500
-Keuntungan tanggal 20 = 11500
-Keuntungan tanggal 22 = 145000
+Keuntungan tanggal 9 = Rp. 61.000,00
+Keuntungan tanggal 10 = Rp. 81.000,00
+Keuntungan tanggal 12 = Rp. 55.000,00

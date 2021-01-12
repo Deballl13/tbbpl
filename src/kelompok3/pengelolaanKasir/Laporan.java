@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -25,8 +27,16 @@ public class Laporan {
 	static PreparedStatement statement;
 	
 	TransaksiData transaksiData;
+	DecimalFormat format = (DecimalFormat) DecimalFormat.getCurrencyInstance();
+	DecimalFormatSymbols simbol = new DecimalFormatSymbols();
 
 	public Laporan(){
+		
+		//	Simbol mata uang
+		simbol.setCurrencySymbol("Rp. ");
+		simbol.setMonetaryDecimalSeparator(',');
+		simbol.setGroupingSeparator('.');
+		format.setDecimalFormatSymbols(simbol);
 		
 		try {
 			Class.forName(JDBC_DRIVER);
@@ -42,6 +52,7 @@ public class Laporan {
 	public void laporanBulanan(){
 		
 		TreeMap<String, TransaksiData> penjualan = new TreeMap<>();
+		Integer total = 0;
 		
 		try {
 			
@@ -67,15 +78,18 @@ public class Laporan {
 						result.getInt("harga")
 				);
 				penjualan.put(result.getString("sku"), transaksiData);
+				total += result.getInt("harga");
 			}
 			
 			cetak.print("SKU");
 	        cetak.print("\t");
 	        cetak.print("Nama Barang");
-	        cetak.print("\t");
+	        cetak.print("\t\t");
 	        cetak.print("Jumlah");
 	        cetak.print("\t\t");
 	        cetak.println("Total Penjualan");
+	        cetak.println("--------------------------------------------"
+	        		+ "----------------------");
 	        
 	        for(Map.Entry list : penjualan.entrySet()){
 	            TransaksiData listLapor = (TransaksiData) list.getValue();
@@ -86,10 +100,11 @@ public class Laporan {
 	            cetak.print("\t\t");
 	            cetak.print(listLapor.getJumlah());
 	            cetak.print("\t\t");
-	            cetak.println(listLapor.getTotal());
+	            cetak.println(format.format(listLapor.getTotal()));
 	            
 	        }
 	        
+	        cetak.println("Total \t\t\t\t\t\t" + format.format(total));
 	        System.out.println("Laporan penjualan bulanan sudah dicetak");
 	        
 	        cetak.close();
@@ -108,6 +123,7 @@ public class Laporan {
 		
 		TreeMap<String, TransaksiData> penjualan = new TreeMap<>();
 		String tanggal = null;
+		Integer total = 0;
 		
 		try {
 			
@@ -138,10 +154,12 @@ public class Laporan {
 					cetak.print("SKU");
 			        cetak.print("\t");
 			        cetak.print("Nama Barang");
-			        cetak.print("\t");
+			        cetak.print("\t\t");
 			        cetak.print("Jumlah");
 			        cetak.print("\t\t");
 			        cetak.println("Total Penjualan");
+			        cetak.println("--------------------------------------------"
+			        		+ "----------------------");
 					
 					for(Map.Entry list : penjualan.entrySet()){
 			            TransaksiData listLapor = (TransaksiData) list.getValue();
@@ -152,12 +170,14 @@ public class Laporan {
 			            cetak.print("\t\t");
 			            cetak.print(listLapor.getJumlah());
 			            cetak.print("\t\t");
-			            cetak.println(listLapor.getTotal());
+			            cetak.println(format.format(listLapor.getTotal()));
 			            
 			        }
 			        
+					cetak.println("Total \t\t\t\t\t\t" + format.format(total));	
 			        cetak.println();
 			        penjualan.clear();
+			        total = 0;
 					
 				}
 
@@ -168,6 +188,7 @@ public class Laporan {
 						result.getInt("harga")
 				);
 				
+				total += result.getInt("harga");
 				tanggal = result.getString("tanggal");
 				penjualan.put(result.getString("sku"), transaksiData);
 				
@@ -177,10 +198,12 @@ public class Laporan {
 			cetak.print("SKU");
 	        cetak.print("\t");
 	        cetak.print("Nama Barang");
-	        cetak.print("\t");
+	        cetak.print("\t\t");
 	        cetak.print("Jumlah");
 	        cetak.print("\t\t");
 	        cetak.println("Total Penjualan");
+	        cetak.println("--------------------------------------------"
+	        		+ "----------------------");
 			
 			for(Map.Entry list : penjualan.entrySet()){
 	            TransaksiData listLapor = (TransaksiData) list.getValue();
@@ -191,10 +214,11 @@ public class Laporan {
 	            cetak.print("\t\t");
 	            cetak.print(listLapor.getJumlah());
 	            cetak.print("\t\t");
-	            cetak.println(listLapor.getTotal());
+	            cetak.println(format.format(listLapor.getTotal()));
 	            
 	        }
 	        
+			cetak.println("Total \t\t\t\t\t\t" + format.format(total));
 	        cetak.println();
 	        penjualan.clear();
 			
@@ -241,7 +265,7 @@ public class Laporan {
 				
 			}
 		
-			cetak.println("Untung bulan ini = " + untung);
+			cetak.println("Untung bulan ini = " + format.format(untung));
 			
 			System.out.println("Silahkan cek keuntungan anda!!");
 			
@@ -291,7 +315,7 @@ public class Laporan {
 				
 				if(tanggal !=null && !result.getString("tanggal").equals(tanggal)) {
 						
-					cetak.println("Keuntungan tanggal " + tanggal + " = " + untung);
+					cetak.println("Keuntungan tanggal " + tanggal + " = " + format.format(untung));
 					untung = 0;
 					
 				}
@@ -301,7 +325,7 @@ public class Laporan {
 				
 			}
 			
-			cetak.println("Keuntungan tanggal " + tanggal + " = " + untung);
+			cetak.println("Keuntungan tanggal " + tanggal + " = " + format.format(untung));
 			cetak.close();
 			
 		} catch (SQLException e) {

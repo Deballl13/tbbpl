@@ -1,6 +1,13 @@
-SKU	Nama Barang	Jumlah		Total Penjualan
-B01	Susu		20		147000
-B02	Kopi		17		170000
-B03	Teh		11		55000
-B04	Energen		6		51000
-B05	Milo		5		700000
+SKU	Nama Barang		Jumlah		Total Penjualan
+------------------------------------------------------------------
+BR1	Teh kotak		15		Rp. 75.000,00
+BR11	Teh sosro		7		Rp. 49.000,00
+BR2	Indomilk cokelat		4		Rp. 20.000,00
+BR3	Indomilk vanilla		3		Rp. 13.500,00
+BR4	Milo cokelat		10		Rp. 50.000,00
+BR5	Milo vanilla		15		Rp. 82.500,00
+BR6	Roti manis		18		Rp. 180.000,00
+BR7	Roti cokelat		6		Rp. 60.000,00
+BR8	Energen jahe		19		Rp. 66.500,00
+BR9	Energen cokelat		16		Rp. 40.000,00
+Total 						Rp. 636.500,00
